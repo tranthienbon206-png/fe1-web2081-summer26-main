@@ -31,7 +31,7 @@ export class Stories {
       year: 1969,
       category: 'Thiếu nhi',
       views: 70000,
-      image: 'https://th.bing.com/th?id=OIF.bIckGp%2bKQtjakFZGjM9sMQ&rs=1&pid=ImgDetMain&o=7&rm=3'
+      image: 'https://m.media-amazon.com/images/M/MV5BYWE2NDkyNjktNDA4MC00OTQ0LTg5ZDYtMjZlYmFhY2JjNGFkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg'
     },
 
    
