@@ -1,7 +1,96 @@
-<h2>Danh sách sản phẩm</h2>
+<h2>Danh sách Products</h2>
 
-<ul>
-    <li>Laptop</li>
-    <li>Phone</li>
-    <li>Tablet</li>
-</ul>
+@if(loading){
+
+<p>Đang tải dữ liệu...</p>
+
+}
+
+@if(error){
+
+<p style="color:red">
+    Không thể tải dữ liệu
+</p>
+
+}
+
+@if(!loading){
+
+<table border="1" cellpadding="10" cellspacing="0">
+
+    <tr>
+
+        <th>ID</th>
+
+        <th>Hình ảnh</th>
+
+        <th>Tên</th>
+
+        <th>Giá</th>
+
+        <th>Danh mục</th>
+
+        <th>Lượt xem</th>
+
+        <th>HOT</th>
+
+        <th>Hành động</th>
+
+    </tr>
+
+    @for(product of products; track product.id){
+
+    <tr>
+
+        <td>{{product.id}}</td>
+
+        <td>
+
+            <img [src]="product.image" width="80">
+
+        </td>
+
+        <td>{{product.name}}</td>
+
+        <td>{{product.price}}</td>
+
+        <td>{{product.category}}</td>
+
+        <td>{{product.views}}</td>
+
+        <td>
+
+            @if(product.views > 90000){
+
+            HOT
+            }
+
+        </td>
+
+        <td>
+
+            <button (click)="deleteProduct(product.id)" [disabled]="deletingId===product.id">
+
+                @if(deletingId===product.id){
+
+                Đang xóa...
+
+                }
+
+                @else{
+
+                Xóa
+
+                }
+
+            </button>
+
+        </td>
+
+    </tr>
+
+    }
+
+</table>
+
+}
