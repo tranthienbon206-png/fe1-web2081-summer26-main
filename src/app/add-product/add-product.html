@@ -1,10 +1,15 @@
 <div class="container mt-5">
+
     <div class="row justify-content-center">
+
         <div class="col-md-6">
 
             <div class="card shadow">
+
                 <div class="card-header bg-primary text-white">
+
                     <h4 class="mb-0">Thêm sản phẩm</h4>
+
                 </div>
 
                 <div class="card-body">
@@ -12,50 +17,96 @@
                     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
 
                         <div class="mb-3">
-                            <label class="form-label">Tên sản phẩm</label>
 
-                            <input type="text" class="form-control" formControlName="name">
+                            <label class="form-label">
+                                Tên sản phẩm
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                formControlName="name">
 
                             @if(name?.invalid && name?.touched){
-                            <div class="text-danger mt-1">
+
+                            <div class="text-danger">
+
                                 Tên sản phẩm không được để trống
+
                             </div>
+
                             }
+
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Giá</label>
 
-                            <input type="number" class="form-control" formControlName="price">
+                            <label class="form-label">
+                                Giá
+                            </label>
+
+                            <input
+                                type="number"
+                                class="form-control"
+                                formControlName="price">
 
                             @if(price?.invalid && price?.touched){
-                            <div class="text-danger mt-1">
+
+                            <div class="text-danger">
+
                                 Giá phải lớn hơn 0
+
                             </div>
+
                             }
+
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Danh mục</label>
+                        <button
+                            type="submit"
+                            class="btn btn-primary w-100"
+                            [disabled]="loading">
 
-                            <input type="text" class="form-control" formControlName="category">
+                            @if(loading){
 
-                            @if(category?.invalid && category?.touched){
-                            <div class="text-danger mt-1">
-                                Danh mục không được để trống
-                            </div>
+                                Đang gửi...
+
+                            }@else{
+
+                                Thêm sản phẩm
+
                             }
-                        </div>
 
-                        <button class="btn btn-primary w-100" [disabled]="addForm.invalid">
-                            Thêm sản phẩm
                         </button>
 
                     </form>
 
+                    @if(success){
+
+                    <div class="alert alert-success mt-3">
+
+                        {{success}}
+
+                    </div>
+
+                    }
+
+                    @if(error){
+
+                    <div class="alert alert-danger mt-3">
+
+                        {{error}}
+
+                    </div>
+
+                    }
+
                 </div>
+
             </div>
 
         </div>
+
     </div>
+
 </div>

@@ -1,20 +1,15 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import {
-  FormBuilder,
-  Validators,
-  ReactiveFormsModule,
-  FormGroup
-} from '@angular/forms';
 
 @Component({
-  selector: 'app-add-product',
+  selector: 'app-add-story',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './add-product.html',
-  styleUrl: './add-product.css'
+  templateUrl: './add-story.html',
+  styleUrl: './add-story.css'
 })
-export class AddProduct {
+export class AddStory {
 
   addForm: FormGroup;
 
@@ -28,21 +23,18 @@ export class AddProduct {
   ) {
 
     this.addForm = this.fb.group({
-      name: ['', Validators.required],
-      price: [0, [Validators.required, Validators.min(1)]]
+      title: ['', Validators.required],
+      author: [''],
+      views: [0]
     });
 
   }
 
-  get name() {
-    return this.addForm.get('name');
+  get title() {
+    return this.addForm.get('title');
   }
 
-  get price() {
-    return this.addForm.get('price');
-  }
-
-  onSubmit() {
+  submitForm() {
 
     if (this.addForm.invalid) {
       this.addForm.markAllAsTouched();
@@ -53,22 +45,20 @@ export class AddProduct {
     this.success = '';
     this.error = '';
 
-    console.log(this.addForm.value);
-
     this.http.post(
-      'http://localhost:3000/products',
+      'http://localhost:3000/stories',
       this.addForm.value
     ).subscribe({
 
       next: () => {
 
         this.loading = false;
-
-        this.success = 'Thêm sản phẩm thành công';
+        this.success = 'Thêm truyện thành công';
 
         this.addForm.reset({
-          name: '',
-          price: 0
+          title: '',
+          author: '',
+          views: 0
         });
 
       },
@@ -76,7 +66,6 @@ export class AddProduct {
       error: () => {
 
         this.loading = false;
-
         this.error = 'Có lỗi xảy ra';
 
       }
